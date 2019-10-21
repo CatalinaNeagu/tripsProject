@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <title>Add user</title>
+</head>
+
+<body>
+<div class="container" style="opacity: 0.9;">
+    <div class="row">
+        <div class="col-8 mx-auto">
+            <div class="card border-0 shadow my-5">
+                <div class="card-body p-5">
+                    <form method="POST" th:action="@{/addperson}" th:object="${person}" autocomplete="off"
+                          class="text-center border border-light px-5 py-2 mx-auto">
+                        <p class="h4 mb-3">Sign up</p>
+
+                        <div class="form-row mb-2">
+                            <div class="col">
+                                <label for="defaultRegisterFormFirstName">First Name:</label>
+                                <input type="text" id="defaultRegisterFormFirstName" class="form-control mb-2"
+                                       th:field="*{firstName}" placeholder="First name">
+                            </div>
+                            <div class="col">
+                                <label for="defaultRegisterFormLastName">Last Name:</label>
+                                <input type="text" id="defaultRegisterFormLastName" class="form-control mb-2"
+                                       th:field="*{lastName}" placeholder="Last name">
+                            </div>
+                        </div>
+                        <label for="defaultRegisterFormusername">Username:</label>
+                        <small class="text-danger" th:if="${#fields.hasErrors('userName')}"
+                               th:errors="*{userName}"></small>
+                        <input type="text" id="defaultRegisterFormusername" th:field="*{userName}"
+                               class="form-control mb-2" placeholder="The username must be unique!"
+                               aria-describedby="defaultRegisterFormUserNameHelpBlock">
+                        <label for="defaultRegisterFormPassword">Password:</label>
+                        <small class="text-danger" th:if="${#fields.hasErrors('password')}"
+                               th:errors="*{password}"></small>
+                        <input type="password" id="defaultRegisterFormPassword" class="form-control mb-2"
+                               placeholder="At least 10 characters containing minimum a letter and a number"
+                               th:field="*{password}">
+
+                        <label for="defaultRegisterCity">City:</label>
+                        <input type="text" id="defaultRegisterCity" class="form-control mb-2" placeholder="City"
+                               th:field="*{city}">
+                        <label for="defaultRegisterAddress">Address:</label>
+                        <input type="text" id="defaultRegisterAddress" class="form-control mb-2" placeholder="Address"
+                               th:field="*{address}">
+
+                        <label for="defaultRegisterPhone">Phone number:</label>
+                        <small class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></small>
+                        <input type="text" id="defaultRegisterPhone" class="form-control mb-2" th:field="*{phone}"
+                               placeholder="The inserted value must be a valid Romanian phone">
+
+                        <button class="btn btn-info my-4" type="submit">Sign up</button>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+</html>

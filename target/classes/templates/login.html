@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Login</title>
+</head>
+<body>
+<div th:if="${param.error}" class="alert alert-danger">
+    Invalid username and password.
+</div>
+<div th:if="${param.logout}" class="alert alert-warning">
+    You have been logged out.
+</div>
+<div style="opacity: 0.9">
+<div class="row">
+    <div class="col-5 mx-auto">
+        <div class="card border-0 shadow my-5">
+            <div class="card-body p-5">
+<!-- Default form login -->
+<form class="text-center mx-auto border border-light p-5" th:action="@{/login}" method="post">
+
+
+    <p class="h4 mb-4">Sign in</p>
+
+    <!-- Email -->
+    <input type="text" name="username" id="defaultLoginFormUsername" class="form-control  mb-4" placeholder="Username">
+
+    <!-- Password -->
+    <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" name="password" placeholder="Password">
+
+    <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
+</form>
+
+    <form class="text-center mx-auto border border-light px-5" th:action="@{/person}" method="post">
+        <p class="h5 mb-4">Not a member?</p>
+        <button class="btn btn-info btn-block my-4" type="submit" >Register</button>
+    </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

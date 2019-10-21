@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Trips</title>
+</head>
+<body>
+<nav class="navbar fixed-top navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand float-left" href="/trips">Weekend Travel</a>
+        <div class="d-flex">
+            <form th:action="@{/personToUpdate}" th:object="${person}" method="post">
+                <!--        <input type="hidden" name="id" th:value="*{id}"/>-->
+                <button class="btn btn-primary mx-3" type="submit">
+                    Profile
+                </button>
+            </form>
+            <form th:action="@{/logout}" method="get">
+                <button class="btn btn-secondary" type="submit">Sign out</button>
+            </form>
+        </div>
+    </div>
+</nav>
+<div th:if="${#lists.isEmpty(trips)}">
+    <h3>You don't have any trips yet. Please click <span><a th:href="@{/trip}">here</a></span> to add the first trip.</h3>
+</div>
+<div class="col-10 mx-auto">
+    <div class="card border-0 shadow my-5">
+        <div class="card-body m-3">
+            <div class="row px-3">
+                <h6>Trips</h6>
+            </div>
+            <div class="row px-3 d-flex justify-content-between">
+                <select style="width: 400px" onchange="window.location.href='/trips?id='+this.value;">
+                    <option th:each="trip : ${trips}"
+                            th:value="${trip.id}"
+                            th:text="${trip.tripName}"
+                            th:selected="${trip.id == selectedId}">
+                    </option>
+                </select>
+
+                <div class="d-flex">
+                    <form th:action="@{/tripToUpdate}" method="post">
+                        <input type="hidden" name="id" th:value="${currentTrip.id}"/>
+                        <button type="submit" class="btn btn-outline-secondary mx-2">
+                            Edit
+                        </button>
+                    </form>
+                    <form th:action="@{/trip}">
+                        <button type="submit" class="btn btn-outline-secondary mx-2">
+                            Add
+                        </button>
+                    </form>
+                    <form th:action="@{/delete}" method="post">
+                        <input type="hidden" name="id" th:value="${currentTrip.id}"/>
+                        <button type="submit" class="btn btn-outline-danger mx-2">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="row my-3 d-flex justify-content-between">
+                <div class="col-8 mbt-4">
+                    <h6>Impressions</h6>
+
+                    <textarea style="width: 100%; height: 100px" th:field="${currentTrip.impressions}"></textarea>
+<!--                    <input style="width: 100%; height: auto" type="text" th:value="${currentTrip.impressions}"/>-->
+                </div>
+                <div class="col-4 mbt-4">
+                    <h6>Dates</h6>
+                    <div class="d-flex">
+                        <input style="text-align: center; max-width: 40%" type="text"
+                               th:value="${currentTrip.startDate}"/><span
+                            class="px-2">-</span>
+                        <input style="text-align: center; max-width: 40%" type="text"
+                               th:value="${currentTrip.endDate}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-3">
+                <div class="col-8">
+                    <h6>Photos</h6>
+                </div>
+                <div class="col-4">
+                    <h6>Location</h6>
+                </div>
+                <div class="col-8 d-inline-flex">
+                    <div class="col-6 mbt-4">
+                        <div class="card">
+                            <img style="max-height: 250px"
+                                 th:src="@{/files/{image}(image=${currentTrip.getPhoto1()})}"/>
+                            <div class="card-body">
+                                <p class="card-text"><input style="width: 100%;" type="text"
+                                                            th:value="${currentTrip.photo1Description}"/></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 mbt-4">
+                        <div class="card">
+                            <img style="max-height: 250px"
+                                 th:src="@{/files/{image}(image=${currentTrip.getPhoto2()})}"/>
+                            <div class="card-body">
+                                <p class="card-text"><input style="width: 100%;" type="text"
+                                                            th:value="${currentTrip.photo2Description}"/></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mbt-4">
+                    <input style="text-align: center" type="text" th:value="${currentTrip.location}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!--<body>-->
+<!--<div>-->
+<!--<select onchange="window.location.href='/trips?id='+this.value;">-->
+<!--    <option th:each="trip : ${trips}"-->
+<!--            th:value="${trip.id}"-->
+<!--            th:text="${trip.tripName}"-->
+<!--            th:selected="${trip.id == selectedId}">-->
+<!--    </option>-->
+<!--</select>-->
+<!--<input type="text" th:field="*{currentTrip.impressions}" th:value="${currentTrip.impressions}"/>-->
+<!--&lt;!&ndash;<input type="text" th:value="${location}"/>&ndash;&gt;-->
+<!--&lt;!&ndash;<input type="text" th:value="${currentTrip.startDate}"/>&ndash;&gt;-->
+<!--&lt;!&ndash;<input type="text" th:value="${currentTrip.endDate}"/>&ndash;&gt;-->
+<!--&lt;!&ndash;<img th:src="@{/files/{image}(image=${currentTrip.getPhoto1()})}"/>&ndash;&gt;-->
+<!--&lt;!&ndash;<img th:src="@{/files/{image}(image=${currentTrip.getPhoto2()})}" th:width="200"/>&ndash;&gt;-->
+<!--&lt;!&ndash;<form th:action="@{/trip}" method="post">&ndash;&gt;-->
+<!--&lt;!&ndash;    <button type="submit" formaction="/trip">Add Trip</button>&ndash;&gt;-->
+<!--&lt;!&ndash;</form>&ndash;&gt;-->
+<!--&lt;!&ndash;    <a th:href="@{/delete/{id}(id=*{currentTrip.id})}">Delete</a>&ndash;&gt;-->
+<!--&lt;!&ndash;</form>&ndash;&gt;-->
+<!--&lt;!&ndash;<form th:action="@{/logout}" method="get"><button type="submit" >signout</button></form>&ndash;&gt;-->
+<!--<form th:action="@{/tripToUpdate}" method="post">-->
+<!--    <input type="hidden" name="id" th:value="*{currentTrip.id}"/>-->
+<!--    <button type="submit" >-->
+<!--        Edit-->
+<!--    </button>-->
+<!--</form>-->
+<!--&lt;!&ndash;    <form th:action="@{/personToUpdate}" th:object="${person}" method="post">&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;        <input type="hidden" name="id" th:value="*{id}"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;        <button type="submit" >&ndash;&gt;-->
+<!--&lt;!&ndash;            Edit&ndash;&gt;-->
+<!--&lt;!&ndash;        </button>&ndash;&gt;-->
+<!--&lt;!&ndash;    </form>&ndash;&gt;-->
+<!--</div>-->
+
+
+</body>
+</html>

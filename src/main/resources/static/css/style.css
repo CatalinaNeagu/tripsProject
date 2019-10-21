@@ -1,0 +1,17 @@
+body {
+    background-image: url(/css/background.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+
+    /*no-repeat center center fixed*/
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+label{
+    float:left;
+}
+input {
+    border-radius: 4px;
+}

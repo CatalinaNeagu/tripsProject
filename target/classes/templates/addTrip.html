@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <title>Add trip</title>
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-8 mx-auto">
+            <div class="card border-0 shadow my-5">
+                <div class="card-body px-5">
+                    <form method="POST" th:action="@{/addtrip}" th:object="${trip}" class="text-center border border-light p-5 mx-auto" enctype="multipart/form-data" autocomplete="off" >
+                        <p class="h4 py-3">Add trip</p>
+                        <label for="defaultRegisterFormTripName">Trip name:</label>
+                        <small class="text-danger" th:if="${#fields.hasErrors('tripName')}"
+                                                                                           th:errors="*{tripName}"></small>
+                                <input type="text" id="defaultRegisterFormTripName" class="form-control mb-2"  th:field="*{tripName}" placeholder="Trip name">
+                        <div class="form-row">
+                            <div class="col">
+                                <label for="defaultRegisterStartdate" style="float: left" >Start Date:</label>
+                        <input  type="date" dateformat="d M y" id="defaultRegisterStartdate" th:field="*{startDate}" class="form-control mb-2" placeholder="Start date">
+                                    <span class="datepicker_label" style="pointer-events: none;"></span>
+                            </div>
+                            <div class="col">
+                                <label for="defaultRegisterEnddate">End Date:</label>
+                                <input type="date" dateformat="d M y" id="defaultRegisterEnddate" th:field="*{endDate}" class="form-control mb-2" placeholder="End date">
+                                    <span class="datepicker_label" style="pointer-events: none;"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label for="defaultRegisterFormLocation">Location:</label>
+                            <small class="text-danger" th:if="${#fields.hasErrors('location')}"
+                                   th:errors="*{location}"></small>
+                        <input type="text" id="defaultRegisterFormLocation" class="form-control mb-2" placeholder="Location" th:field="*{location}">
+                        </div>
+                        <div class="form-row">
+                            <label for="defaultRegisterFormLocation">Impressions:</label>
+                            <small class="text-danger" th:if="${#fields.hasErrors('impressions')}"
+                                   th:errors="*{impressions}"></small>
+                        <input type="text" id="defaultRegisterImpressions" class="form-control mb-2" placeholder="Impressions" th:field="*{impressions}">
+                        </div>
+                        <div class="form-row">
+                            <div class="col-6">
+                                <label for="defaultRegisterPhoto1Description">Photo 1:</label>
+                                <input type="file" name="file" class="form-control mb-2"/>
+                                <input type="text" id="defaultRegisterPhoto1Description" class="form-control mb-2" placeholder="Photo description" th:field="*{photo1Description}">
+                            </div>
+                            <div class="col-6">
+                                <label for="defaultRegisterPhoto2Description">Photo 2:</label>
+                                <input type="file" name="file2" class="form-control mb-2"/>
+                                <input type="text" id="defaultRegisterPhoto2Description" class="form-control mb-2" placeholder="Photo description" th:field="*{photo2Description}">
+                            </div>
+                        </div>
+                        <hr>
+                        <button class="btn btn-info my-4" type="submit">Add trip</button>
+
+
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+
+
+</html>
+
+
+<!--<!DOCTYPE HTML>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>Add trip</title>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<form method="POST" th:action="@{/addtrip}" th:object="${trip}" enctype="multipart/form-data" autocomplete="off">>-->
+<!--    <label for="tripName" >Trip Name:</label>-->
+<!--    <input type="text" id="tripName" th:field="*{tripName}"/>-->
+<!--    <label for="startDate" >Date from:</label>-->
+<!--    <input id="startDate" dateformat="d M y" type="date" th:field="*{startDate}"/>-->
+<!--    <span class="datepicker_label" style="pointer-events: none;"></span>-->
+<!--    <label for="endDate" >Date from:</label>-->
+<!--    <input id="endDate" dateformat="d M y" type="date" th:field="*{endDate}"/>-->
+<!--    <span class="datepicker_label" style="pointer-events: none;"></span>-->
+<!--    <label for="location" >Location:</label>-->
+<!--    <input type="location" id="location" th:field="*{location}"/>-->
+<!--    <label for="impressions" >Impresions:</label>-->
+<!--    <input type="text" id="impressions" th:field="*{impressions}"/>-->
+
+<!--    <input type="file" name="file" /><br/>-->
+<!--    <input type="file" name="file2" /><br/>-->
+
+<!--    <input type="submit" value="Add trip"/>-->
+<!--</form>-->
+
+<!--<form class="text-center mx-auto border border-light p-6" style="width: 300px;" th:action="@{/logout}" method="post">-->
+<!--    <button class="btn btn-info btn-block my-4" type="submit">Logout</button>-->
+<!--</form>-->
+<!--</body>-->
+
+<!--</html>-->

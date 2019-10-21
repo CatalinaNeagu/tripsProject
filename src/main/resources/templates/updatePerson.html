@@ -1,0 +1,187 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+    <title>User update</title>
+</head>
+
+<body>
+<div class="container" style="opacity: 0.9;">
+    <div class="row">
+        <div class="col-8 mx-auto">
+            <div class="card border-0 shadow my-5">
+                <div class="card-body p-5">
+                    <form method="POST" th:action="@{/updatedPerson}" th:object="${person}" autocomplete="off"
+                          class="text-center border border-light px-5 py-2 mx-auto">
+                        <p class="h4 mb-3">Edit your profile</p>
+
+                        <div class="form-row mb-2">
+                            <div class="col">
+                                <label for="defaultRegisterFormFirstName">First Name:</label>
+                                <input type="text" id="defaultRegisterFormFirstName" class="form-control mb-2"
+                                       th:field="*{firstName}" th:value="${firstName}" placeholder="First name">
+                            </div>
+                            <div class="col">
+                                <label for="defaultRegisterFormLastName">Last Name:</label>
+                                <input type="text" id="defaultRegisterFormLastName" class="form-control mb-2"
+                                       th:field="*{lastName}" th:value="${lastName}" placeholder="Last name">
+                            </div>
+                        </div>
+                        <label for="defaultRegisterFormusername">Username:</label>
+                        <small class="text-danger" th:if="${#fields.hasErrors('userName')}"
+                               th:errors="*{userName}" th:value="${userName}"></small>
+                        <input type="text" id="defaultRegisterFormusername" th:field="*{userName}"
+                               class="form-control mb-2" placeholder="The username must be unique!"
+                               aria-describedby="defaultRegisterFormUsernNmeHelpBlock">
+
+                        <label for="defaultRegisterFormPassword">Password:</label>
+                        <small class="text-danger" th:if="${#fields.hasErrors('password')}"
+                               th:errors="*{password}"></small>
+                        <input type="password" id="defaultRegisterFormPassword" class="form-control mb-2"
+                               placeholder="At least 10 characters containing minimum a letter and a number"
+                               th:field="*{password}" th:value="${password}">
+
+                        <label for="defaultRegisterCity">City:</label>
+                        <input type="text" id="defaultRegisterCity" class="form-control mb-2" placeholder="City"
+                               th:field="*{city}" th:value="${city}">
+                        <label for="defaultRegisterAddress">Address:</label>
+                        <input type="text" id="defaultRegisterAddress" class="form-control mb-2" placeholder="Address"
+                               th:field="*{address}" th:value="${address}">
+
+                        <label for="defaultRegisterPhone">Phone number:</label>
+                        <small class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" th:value="${phone}"></small>
+                        <input type="text" id="defaultRegisterPhone" class="form-control mb-2" th:field="*{phone}"
+                               placeholder="The inserted value must be a valid Romanian phone">
+
+                        <button class="btn btn-info my-4" type="submit">Edit your profile</button>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
+
+
+<!--<!DOCTYPE HTML>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+
+<!--<head>-->
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+<!--    <link rel="stylesheet" th:href="@{/css/style.css}">-->
+
+<!--    <title>Your profile</title>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<div class="container">-->
+<!--    <div class="row">-->
+<!--        <div class="col-8 mx-auto">-->
+<!--            <div class="card border-0 shadow my-5">-->
+<!--                <div class="card-body p-5">-->
+<!--                    <form method="POST" th:action="@{/updatedPerson}" th:object="${person}" autocomplete="off" class="text-center border border-light p-5 mx-auto" >-->
+<!--                        <p class="h4 mb-2">Your profile</p>-->
+
+<!--                        <div class="form-row mb-2">-->
+<!--                            <div class="col">-->
+<!--                                &lt;!&ndash; First name &ndash;&gt;-->
+<!--                                <input type="text" id="defaultRegisterFormFirstName" class="form-control"  th:field="*{firstName}" th:value="${firstName}"/>-->
+<!--                            </div>-->
+<!--                            <div class="col">-->
+<!--                                &lt;!&ndash; Last name &ndash;&gt;-->
+<!--                                <input type="text" id="defaultRegisterFormLastName" class="form-control" th:field="*{lastName}" placeholder="Last name">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <input type="text" id="defaultRegisterFormusername" th:field="*{userName}" class="form-control" placeholder="UserName" aria-describedby="defaultRegisterFormUsernNmeHelpBlock">-->
+<!--                        <small id="defaultRegisterFormUserNameHelpBlock" class="form-text text-muted mb-2">-->
+<!--                            The username must be unique!-->
+<!--                        </small>-->
+<!--                        <small class="text-danger" th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"></small>-->
+<!--                        &lt;!&ndash; Password &ndash;&gt;-->
+<!--                        <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" th:field="*{password}">-->
+<!--                        <small class="form-text text-muted mb-2">-->
+<!--                            At least 10 characters containing minimum a letter and a number-->
+<!--                        </small>-->
+<!--                        <small class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>-->
+<!--                        &lt;!&ndash; City &ndash;&gt;-->
+<!--                        <input type="text" id="defaultRegisterCity" class="form-control mb-2" placeholder="City" th:field="*{city}">-->
+<!--                        &lt;!&ndash; Address &ndash;&gt;-->
+<!--                        <input type="text" id="defaultRegisterAddress" class="form-control mb-2" placeholder="Address" th:field="*{address}">-->
+<!--                        &lt;!&ndash; Phone number &ndash;&gt;-->
+<!--                        <input type="text" id="defaultRegisterPhonePassword" class="form-control" th:field="*{phone}" placeholder="Phone number">-->
+<!--                        <small class="form-text text-muted mb-2">-->
+<!--                            The inserted value must be a valid Romanian phone-->
+<!--                        </small>-->
+<!--                        <small class="text-danger" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></small>-->
+
+<!--                        &lt;!&ndash; Sign up button &ndash;&gt;-->
+<!--                        <button class="btn btn-info my-2 btn-block" type="submit">Sign up</button>-->
+
+<!--                        <hr>-->
+
+<!--                        &lt;!&ndash; Terms of service &ndash;&gt;-->
+<!--                        <p>By clicking-->
+<!--                            <em>Sign up</em> you agree to our-->
+<!--                            <a href="" target="_blank">terms of service</a></p>-->
+
+<!--                    </form>-->
+
+<!--                    &lt;!&ndash; Default form register &ndash;&gt;-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+
+
+
+
+<!--</html>-->
+
+
+
+
+<!--<!DOCTYPE HTML>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+<!--<head>-->
+<!--    <title>Edit Person</title>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<form method="POST" th:action="@{/updatedPerson}" th:object="${person}" autocomplete="off">-->
+<!--&lt;!&ndash;    <input type="hidden" name="id" th:value="*{id}">&ndash;&gt;-->
+<!--    <label for="firstName" >First Name:</label>-->
+<!--    <input type="text" id="firstName" th:field="*{firstName}" th:value="${firstName}"/>-->
+
+<!--    <label for="lastName" >Last Name:</label>-->
+<!--    <input type="text" id="lastName" th:field="*{lastName}" th:value="${lastName}"/>-->
+
+<!--    <label for="username" >Username:</label>-->
+<!--    <input type="text" id="username" th:field="*{userName}" th:value="${userName}"/>-->
+<!--    <label for="password" >Password:</label>-->
+<!--    <input type="password" id="password" th:field="*{password}" th:value="${password}"/>-->
+<!--    <label for="city" >City:</label>-->
+<!--    <input type="text" id="city" th:field="*{city}" th:value="${city}" />-->
+<!--    <label for="address" >Address:</label>-->
+<!--    <input type="text" id="address" th:field="*{address}" th:value="${address}"/>-->
+<!--    <label for="phone" >phone:</label>-->
+<!--    <input type="text" id="phone" th:field="*{phone}" th:value="${phone}"/>-->
+
+
+<!--    <input type="submit" value="Say HI"/>-->
+<!--</form>-->
+<!--</body>-->
+
+<!--</html>-->
+
+
